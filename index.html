@@ -8,8 +8,8 @@
     <style>
         :root {
             --bg-color: #08080a;
-            --glass-bg: rgba(255, 255, 255, 0.015);
-            --glass-border: rgba(255, 255, 255, 0.04);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
             --text-main: #f5f5f7;
             --text-muted: #86868b;
             --primary: #5865F2;
@@ -29,7 +29,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Apple-style smooth scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
@@ -51,7 +50,7 @@
             position: relative;
         }
 
-        /* Dark overlay to make background image blend seamlessly with dark theme */
+        /* Lighter overlay so the background image is clearly visible */
         body::before {
             content: '';
             position: fixed;
@@ -59,7 +58,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(8, 8, 10, 0.85);
+            background: rgba(8, 8, 10, 0.65);
             z-index: -1;
         }
 
@@ -83,18 +82,19 @@
             z-index: 1;
         }
 
+        /* True Transparent Glassmorphism */
         .glass-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 28px;
             padding: 2.5rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             transition: transform 0.4s ease, border 0.4s ease;
         }
         .glass-card:hover {
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         /* Hero Section */
@@ -111,7 +111,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.04);
             padding: 0.5rem 1.2rem;
             border-radius: 20px;
             border: 1px solid var(--glass-border);
@@ -122,7 +122,7 @@
             width: 130px;
             height: 130px;
             border-radius: 35%; 
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
             box-shadow: 0 8px 32px rgba(0,0,0,0.4);
             margin-bottom: 0.5rem;
         }
@@ -150,7 +150,7 @@
         }
 
         .stat-box {
-            background: rgba(0,0,0,0.15);
+            background: rgba(0,0,0,0.25);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 1.5rem;
@@ -201,8 +201,8 @@
 
         /* Upcoming Event Card */
         .event-card {
-            background: linear-gradient(145deg, rgba(157, 123, 250, 0.04), rgba(88, 101, 242, 0.02));
-            border: 1px solid rgba(157, 123, 250, 0.15);
+            background: linear-gradient(145deg, rgba(157, 123, 250, 0.08), rgba(88, 101, 242, 0.04));
+            border: 1px solid rgba(157, 123, 250, 0.25);
             text-align: center;
         }
         
@@ -259,8 +259,8 @@
         }
 
         .bot-card {
-            background: rgba(0,0,0,0.15);
-            border: 1px solid rgba(255,255,255,0.03);
+            background: rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 20px;
             overflow: hidden;
             display: flex;
@@ -271,7 +271,7 @@
         .bot-img-wrapper {
             width: 100%;
             background: rgba(0,0,0,0.4);
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -331,7 +331,7 @@
         }
 
         .team-card {
-            background: rgba(0,0,0,0.15);
+            background: rgba(0,0,0,0.25);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 1rem;
@@ -343,7 +343,7 @@
         }
         .team-card:hover {
             transform: translateY(-3px);
-            border-color: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.15);
         }
 
         .team-avatar-wrapper {
@@ -417,9 +417,10 @@
             font-size: 1.05rem;
             color: var(--text-muted);
             padding: 1rem 1.5rem;
-            background: rgba(0,0,0,0.1);
+            background: rgba(0,0,0,0.2);
             border-radius: 14px;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         .rules-list li span {
@@ -534,7 +535,7 @@
 
                 <div class="bot-card">
                     <div class="bot-img-wrapper">
-                        <img src="https://cdn.discordapp.com/attachments/890171606532522005/1530948690741694615/image.png?ex=6a676e93&is=6a661d13&hm=65bd33a56067d612e943c1dd6cecd0075a180de0a9a8867a713e2b9503633536&" alt="Anti Spam System">
+                        <img src="https://media.discordapp.net/attachments/890171606532522005/1530948690741694615/image.png?ex=6a676e93&is=6a661d13&hm=65bd33a56067d612e943c1dd6cecd0075a180de0a9a8867a713e2b9503633536&" alt="Anti Spam System">
                     </div>
                     <div class="bot-content">
                         <h4>Anti-Spam</h4>
@@ -558,7 +559,6 @@
         <section class="glass-card reveal">
             <h3 class="section-title" style="margin-bottom: 1.5rem;">Community Teams</h3>
             <div id="roles-container" class="roles-section">
-                <!-- Fallback pre-rendered headers so Support & FSD Team always show up -->
                 <div class="role-category">
                     <h4>Support</h4>
                     <div class="team-grid">
@@ -590,7 +590,6 @@
     </div>
 
     <script>
-        // Smooth scroll reveal animations
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -605,7 +604,6 @@
         window.addEventListener("scroll", reveal);
         reveal();
 
-        // Apple-style smooth number counting animation
         function animateValue(id, start, end, duration) {
             const obj = document.getElementById(id);
             if (!obj) return;
@@ -624,7 +622,6 @@
             window.requestAnimationFrame(step);
         }
 
-        // Fetch Live Stats from Discord Widget API
         async function fetchDiscordStats() {
             try {
                 const response = await fetch('https://discord.com/api/v9/invites/mmrzFwm6NZ?with_counts=true');
@@ -643,7 +640,6 @@
             }
         }
 
-        // Fetch Bot Roles API (Support & FSD Team, etc.)
         async function fetchRolesData() {
             const container = document.getElementById('roles-container');
             try {
@@ -693,11 +689,9 @@
                 }
             } catch (error) {
                 console.error('Error fetching roles data from bot server:', error);
-                // Keeps the fallback Support & FSD Team headers stating "Not connected to backend"
             }
         }
 
-        // Run data fetching on load
         fetchDiscordStats();
         fetchRolesData();
     </script>
