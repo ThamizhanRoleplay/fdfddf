@@ -626,7 +626,7 @@
         async function fetchRolesData() {
             const container = document.getElementById('roles-container');
             try {
-                const response = await fetch('https://kadalaintegration.onrender.com/api/roles');
+                const response = await fetch('https://kadalaintegration.onrender.com/');
                 const data = await response.json();
                 
                 if (data.roles && data.roles.length > 0) {
