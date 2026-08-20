@@ -36,8 +36,6 @@
 
         body {
             background-color: var(--bg-color);
-            /* EMBEDDED LOCAL BACKGROUND IMAGE (Base64 or relative path format) */
-            /* Replace data:image/jpeg;base64,... with your local image data, or use background.jpg if in the same folder */
             background-image: url('background.jpg'); 
             background-size: cover;
             background-position: center;
@@ -244,11 +242,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 1.5rem 0;
         }
 
         .bot-img-wrapper img {
-            width: 100%;
-            height: auto; 
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
             display: block;
         }
 
