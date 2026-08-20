@@ -420,6 +420,39 @@
             width: 20px;
         }
 
+        /* Floating Background Music Widget Styling */
+        .music-widget {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 100;
+        }
+
+        .music-btn {
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            border-color: rgba(157, 123, 250, 0.4);
+            transform: scale(1.05);
+            background: rgba(20, 20, 30, 0.6);
+        }
+
         footer {
             padding-bottom: 3rem;
             color: var(--text-muted);
@@ -497,15 +530,13 @@
                     </div>
                 </div>
 
-                
-
                 <div class="bot-card">
                     <div class="bot-img-wrapper">
                         <img src="https://media.discordapp.net/attachments/1539278535145955408/1539817245977481327/ezgif.com-resize_1.gif?ex=6a87b20f&is=6a86608f&hm=7d13da68b02fe3ceb089e1a566a6be0a4029db2c9c992248dfd7e006d5bab69f&=" alt="Anti Nuke System">
                     </div>
                     <div class="bot-content">
                         <h4>Anti-Nuke</h4>
-                        <p>Continuously monitors The server To prevent The nuke  </p>
+                        <p>Continuously monitors The server To prevent The nuke </p>
                     </div>
                 </div>
 
@@ -556,6 +587,18 @@
         <footer>
             made by ruwaidcool
         </footer>
+    </div>
+
+    <!-- Background Music Widget -->
+    <div class="music-widget">
+        <audio id="bg-music" loop>
+            <!-- Change 'music.mp3' to match your actual MP3 filename -->
+            <source src="music.mp3" type="audio/mp3">
+        </audio>
+        <button id="music-toggle" class="music-btn" title="Play/Pause Music">
+            <svg id="music-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            <span id="music-text">Play Vibe</span>
+        </button>
     </div>
 
     <script>
@@ -668,6 +711,28 @@
                 container.innerHTML = '<p class="no-members">Unable to load team list from backend server (Server is waking up, please refresh in 30 seconds).</p>';
             }
         }
+
+        // Music Player Toggle Functionality
+        const audio = document.getElementById('bg-music');
+        const musicToggle = document.getElementById('music-toggle');
+        const musicText = document.getElementById('music-text');
+        
+        audio.volume = 0.4; // Comfortable starting volume
+
+        musicToggle.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    musicText.innerText = 'Pause Vibe';
+                    musicToggle.style.borderColor = 'var(--accent)';
+                }).catch(err => {
+                    console.error("Playback failed or direct file not found:", err);
+                });
+            } else {
+                audio.pause();
+                musicText.innerText = 'Play Vibe';
+                musicToggle.style.borderColor = 'var(--glass-border)';
+            }
+        });
 
         fetchDiscordStats();
         fetchRolesData();
