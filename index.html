@@ -420,37 +420,138 @@
             width: 20px;
         }
 
-        /* Floating Background Music Widget Styling */
+        /* Notification-style Music Widget */
         .music-widget {
             position: fixed;
             bottom: 25px;
             right: 25px;
             z-index: 100;
-        }
-
-        .music-btn {
-            background: var(--glass-bg);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(15, 15, 22, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--glass-border);
-            color: var(--text-main);
-            padding: 0.75rem 1.25rem;
-            border-radius: 50px;
-            cursor: pointer;
+            border-radius: 20px;
+            padding: 1rem;
+            width: 290px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
             display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 500;
-            font-size: 0.9rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            flex-direction: column;
+            gap: 0.75rem;
             transition: all 0.3s ease;
         }
 
-        .music-btn:hover {
+        .music-widget:hover {
             border-color: rgba(157, 123, 250, 0.4);
-            transform: scale(1.05);
-            background: rgba(20, 20, 30, 0.6);
+            box-shadow: 0 12px 40px rgba(157, 123, 250, 0.15);
+        }
+
+        .music-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .music-thumb {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .music-meta {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            gap: 0.1rem;
+        }
+
+        .music-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .music-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .music-progress-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--accent);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+
+        .time-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .music-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(157, 123, 250, 0.2);
+            border-color: var(--accent);
+            transform: scale(1.08);
+        }
+
+        .control-btn.play-pause {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border: none;
+            color: #000;
+        }
+
+        .control-btn.play-pause:hover {
+            background: #b59bff;
         }
 
         footer {
@@ -472,6 +573,7 @@
             .stat-box { flex: 1; min-width: 120px; padding: 1rem; }
             .stat-number { font-size: 1.8rem; }
             .team-badge { display: none; }
+            .music-widget { right: 15px; bottom: 15px; width: calc(100% - 30px); max-width: 320px; }
         }
     </style>
 </head>
@@ -589,16 +691,46 @@
         </footer>
     </div>
 
-    <!-- Background Music Widget -->
+    <!-- Notification-Style Music Player Widget -->
     <div class="music-widget">
-        <audio id="bg-music" loop>
-            <!-- Change 'music.mp3' to match your actual MP3 filename -->
-            <source src="music.mp3" type="audio/mp3">
-        </audio>
-        <button id="music-toggle" class="music-btn" title="Play/Pause Music">
-            <svg id="music-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-            <span id="music-text">Play Vibe</span>
-        </button>
+        <audio id="bg-music" src="music.mp3" loop></audio>
+        
+        <div class="music-header">
+            <!-- Replace thumbnail src if needed -->
+            <img src="https://cdn.discordapp.com/icons/1477203957926461493/a_cdf9b9e5589fa4c6160436762d291338?size=1024" alt="Track Art" class="music-thumb">
+            <div class="music-meta">
+                <div class="music-title">Nalaru Po</div>
+                <div class="music-subtitle">Ver Kadalai Vibe</div>
+            </div>
+        </div>
+
+        <div class="music-progress-container">
+            <div class="progress-bar-bg" id="progress-container">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+            <div class="time-labels">
+                <span id="current-time">0:00</span>
+                <span id="total-duration">0:00</span>
+            </div>
+        </div>
+
+        <div class="music-controls">
+            <!-- Rewind 10s -->
+            <button class="control-btn" id="rewind-btn" title="Rewind 10s">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 19l-9-7 9-7v14z"></path><path d="M22 19l-9-7 9-7v14z"></path></svg>
+            </button>
+            
+            <!-- Play / Pause -->
+            <button class="control-btn play-pause" id="play-pause-btn" title="Play/Pause">
+                <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+            </button>
+            
+            <!-- Forward 10s -->
+            <button class="control-btn" id="forward-btn" title="Forward 10s">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 19l9-7-9-7v14z"></path><path d="M2 19l9-7-9-7v14z"></path></svg>
+            </button>
+        </div>
     </div>
 
     <script>
@@ -712,25 +844,83 @@
             }
         }
 
-        // Music Player Toggle Functionality
+        // Notification-Style Music Player Functionality
         const audio = document.getElementById('bg-music');
-        const musicToggle = document.getElementById('music-toggle');
-        const musicText = document.getElementById('music-text');
-        
-        audio.volume = 0.4; // Comfortable starting volume
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        const rewindBtn = document.getElementById('rewind-btn');
+        const forwardBtn = document.getElementById('forward-btn');
+        const progressContainer = document.getElementById('progress-container');
+        const progressFill = document.getElementById('progress-fill');
+        const currentTimeEl = document.getElementById('current-time');
+        const totalDurationEl = document.getElementById('total-duration');
 
-        musicToggle.addEventListener('click', () => {
+        audio.volume = 0.4;
+
+        // Format seconds to mm:ss
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        // Try to autoplay immediately when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.play().then(() => {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            }).catch(error => {
+                console.log("Autoplay restricted by browser, waiting for interaction:", error);
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            });
+        });
+
+        // Update total duration once audio metadata loads
+        audio.addEventListener('loadedmetadata', () => {
+            totalDurationEl.innerText = formatTime(audio.duration);
+        });
+
+        // Update progress bar and current time continuously
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progressPercent = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progressPercent}%`;
+                currentTimeEl.innerText = formatTime(audio.currentTime);
+            }
+        });
+
+        // Play/Pause button toggle
+        playPauseBtn.addEventListener('click', () => {
             if (audio.paused) {
-                audio.play().then(() => {
-                    musicText.innerText = 'Pause Vibe';
-                    musicToggle.style.borderColor = 'var(--accent)';
-                }).catch(err => {
-                    console.error("Playback failed or direct file not found:", err);
-                });
+                audio.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
             } else {
                 audio.pause();
-                musicText.innerText = 'Play Vibe';
-                musicToggle.style.borderColor = 'var(--glass-border)';
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            }
+        });
+
+        // Rewind 10 seconds
+        rewindBtn.addEventListener('click', () => {
+            audio.currentTime = Math.max(0, audio.currentTime - 10);
+        });
+
+        // Forward 10 seconds
+        forwardBtn.addEventListener('click', () => {
+            audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10);
+        });
+
+        // Click progress bar to seek
+        progressContainer.addEventListener('click', (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const width = rect.width;
+            if (audio.duration) {
+                audio.currentTime = (clickX / width) * audio.duration;
             }
         });
 
