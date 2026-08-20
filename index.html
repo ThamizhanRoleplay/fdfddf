@@ -692,8 +692,12 @@
     </div>
 
     <!-- Notification-Style Music Player Widget -->
-    <div class="music-widget">
-        <audio id="bg-music" src="music.mp3" loop></audio>
+    <!-- Notification-Style Music Player Widget -->
+<div class="music-widget">
+    <audio id="bg-music" preload="auto" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
         
         <div class="music-header">
             <!-- Replace thumbnail src if needed -->
@@ -858,31 +862,23 @@
 
         audio.volume = 0.4;
 
-        // Format seconds to mm:ss
         function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
             const mins = Math.floor(seconds / 60);
             const secs = Math.floor(seconds % 60);
             return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
         }
 
-        // Try to autoplay immediately when page loads
-        window.addEventListener('DOMContentLoaded', () => {
-            audio.play().then(() => {
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
-            }).catch(error => {
-                console.log("Autoplay restricted by browser, waiting for interaction:", error);
-                playIcon.style.display = 'block';
-                pauseIcon.style.display = 'none';
-            });
+        // Catch audio loading errors
+        audio.addEventListener('error', (e) => {
+            console.error("Error loading music.mp3. Check if the file is in the root directory and named exactly 'music.mp3'.", e);
+            totalDurationEl.innerText = "Error";
         });
 
-        // Update total duration once audio metadata loads
         audio.addEventListener('loadedmetadata', () => {
             totalDurationEl.innerText = formatTime(audio.duration);
         });
 
-        // Update progress bar and current time continuously
         audio.addEventListener('timeupdate', () => {
             if (audio.duration) {
                 const progressPercent = (audio.currentTime / audio.duration) * 100;
@@ -891,12 +887,25 @@
             }
         });
 
-        // Play/Pause button toggle
-        playPauseBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
+        // Try autoplay
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.load();
+            audio.play().then(() => {
                 playIcon.style.display = 'none';
                 pauseIcon.style.display = 'block';
+            }).catch(error => {
+                console.log("Autoplay blocked by browser policy. Click play to start.", error);
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            });
+        });
+
+        playPauseBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'block';
+                }).catch(err => console.log("Play prevented:", err));
             } else {
                 audio.pause();
                 playIcon.style.display = 'block';
@@ -904,17 +913,14 @@
             }
         });
 
-        // Rewind 10 seconds
         rewindBtn.addEventListener('click', () => {
             audio.currentTime = Math.max(0, audio.currentTime - 10);
         });
 
-        // Forward 10 seconds
         forwardBtn.addEventListener('click', () => {
             audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10);
         });
 
-        // Click progress bar to seek
         progressContainer.addEventListener('click', (e) => {
             const rect = progressContainer.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
@@ -923,7 +929,6 @@
                 audio.currentTime = (clickX / width) * audio.duration;
             }
         });
-
         fetchDiscordStats();
         fetchRolesData();
     </script>
