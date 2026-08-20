@@ -36,7 +36,9 @@
 
         body {
             background-color: var(--bg-color);
-            background-image: url('https://media.discordapp.net/attachments/1539278535145955408/1539317341152878664/file_00000000a6348230a7f439d8e96f062f.jpg?ex=6a85e07d&is=6a848efd&hm=bd09ab6540974d279532ca68e68e86395e09943b3f0dd52c3fa7623a7e587555&=&format=webp&width=640&height=361');
+            /* EMBEDDED LOCAL BACKGROUND IMAGE (Base64 or relative path format) */
+            /* Replace data:image/jpeg;base64,... with your local image data, or use background.jpg if in the same folder */
+            background-image: url('background.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -50,7 +52,6 @@
             position: relative;
         }
 
-        /* Subtle overlay to keep background image clear and vibrant */
         body::before {
             content: '';
             position: fixed;
@@ -58,7 +59,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(8, 8, 10, 0.4);
+            background: rgba(8, 8, 10, 0.6);
             z-index: -1;
         }
 
@@ -82,7 +83,6 @@
             z-index: 1;
         }
 
-        /* Low blur for crisp background visibility */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(4px);
@@ -97,7 +97,6 @@
             border: 1px solid rgba(157, 123, 250, 0.3);
         }
 
-        /* Hero Section */
         .hero {
             text-align: center;
             display: flex;
@@ -125,6 +124,7 @@
             border: 1px solid rgba(255,255,255,0.15);
             box-shadow: 0 8px 32px rgba(0,0,0,0.4);
             margin-bottom: 0.5rem;
+            object-fit: cover;
         }
 
         .hero h1 {
@@ -139,7 +139,6 @@
             font-weight: 400;
         }
 
-        /* Stats Row */
         .stats-container {
             display: flex;
             gap: 1.5rem;
@@ -178,7 +177,6 @@
             font-weight: 500;
         }
 
-        /* Call to Action */
         .btn-join {
             display: inline-block;
             background: var(--primary);
@@ -199,7 +197,6 @@
             transform: scale(1.02);
         }
 
-        /* About Us Section */
         .about-section {
             text-align: center;
             line-height: 1.6;
@@ -216,7 +213,6 @@
             font-size: 1.1rem;
         }
 
-        /* Bot Features Section */
         .section-title {
             text-align: center;
             font-size: 2rem;
@@ -274,7 +270,6 @@
             line-height: 1.5;
         }
 
-        /* Dynamic Role Sections matching reference screenshot style */
         .roles-section {
             display: flex;
             flex-direction: column;
@@ -398,7 +393,6 @@
             font-style: italic;
         }
 
-        /* Minimal Rules */
         .rules-list {
             list-style: none;
             display: flex;
@@ -495,7 +489,7 @@
             <div class="bot-grid">
                 <div class="bot-card">
                     <div class="bot-img-wrapper">
-                        <img src="https://cdn.discordapp.com/attachments/1498310391434842252/1530947392055152773/image.png?ex=6a676d5d&is=6a661bdd&hm=58ebc15f0a6d21e7d74bd544abcd3b8422bb676587ce43c6ef7c0a933cb69d1e&" alt="Kadala AFK System">
+                        <img src="https://cdn.discordapp.com/attachments/1498310391434842252/1530947392055152773/image.png" alt="Kadala AFK System">
                     </div>
                     <div class="bot-content">
                         <h4>Kadala AFK</h4>
@@ -505,7 +499,7 @@
 
                 <div class="bot-card">
                     <div class="bot-img-wrapper">
-                        <img src="https://media.discordapp.net/attachments/1498310391434842252/1530947743198220409/image.png?ex=6a676db1&is=6a661c31&hm=e68f054630e175f1480ac9777a1c4060e80222e4032a8e66064d1c508351fc1a&=&format=webp&quality=lossless" alt="Anti Nuke System">
+                        <img src="https://media.discordapp.net/attachments/1498310391434842252/1530947743198220409/image.png" alt="Anti Nuke System">
                     </div>
                     <div class="bot-content">
                         <h4>Anti-Nuke System</h4>
@@ -515,7 +509,7 @@
 
                 <div class="bot-card">
                     <div class="bot-img-wrapper">
-                        <img src="https://media.discordapp.net/attachments/1498310391434842252/1530948346578079744/image.png?ex=6a676e41&is=6a661cc1&hm=c6268db3d1e2f9953309fd525809f483a422fa01092cd85f6186d9176c8f9fa5&=&format=webp&quality=lossless" alt="Anti Profanity System">
+                        <img src="https://media.discordapp.net/attachments/1498310391434842252/1530948346578079744/image.png" alt="Anti Profanity System">
                     </div>
                     <div class="bot-content">
                         <h4>Anti-Profanity</h4>
@@ -525,7 +519,7 @@
 
                 <div class="bot-card">
                     <div class="bot-img-wrapper">
-                        <img src="https://media.discordapp.net/attachments/890171606532522005/1530948690741694615/image.png?ex=6a676e93&is=6a661d13&hm=65bd33a56067d612e943c1dd6cecd0075a180de0a9a8867a713e2b9503633536&" alt="Anti Spam System">
+                        <img src="https://media.discordapp.net/attachments/890171606532522005/1530948690741694615/image.png" alt="Anti Spam System">
                     </div>
                     <div class="bot-content">
                         <h4>Anti-Spam</h4>
@@ -535,7 +529,7 @@
 
                 <div class="bot-card">
                     <div class="bot-img-wrapper">
-                        <img src="https://media.discordapp.net/attachments/1498310391434842252/1530948913690054767/image.png?ex=6a676ec8&is=6a661d48&hm=dde21661f0d2bbccd471ee2048a8c0d0c48bb15882e6cb1e66a138d8e64fe58d&=&format=webp&quality=lossless" alt="Anti Mass Ping System">
+                        <img src="https://media.discordapp.net/attachments/1498310391434842252/1530948913690054767/image.png" alt="Anti Mass Ping System">
                     </div>
                     <div class="bot-content">
                         <h4>Anti-Mass Ping</h4>
@@ -555,7 +549,7 @@
             </ul>
         </section>
 
-        <!-- Server Team & Roles Section (At the very bottom) -->
+        <!-- Server Team & Roles Section -->
         <section class="glass-card reveal">
             <h3 class="section-title" style="margin-bottom: 1.5rem;">Server Team</h3>
             <div id="roles-container" class="roles-section">
@@ -674,10 +668,12 @@
                         categoryDiv.appendChild(list);
                         container.appendChild(categoryDiv);
                     });
+                } else {
+                    container.innerHTML = '<p class="no-members">No team categories configured on backend.</p>';
                 }
             } catch (error) {
                 console.error('Error fetching roles data from bot server:', error);
-                container.innerHTML = '<p class="no-members">Unable to load team list from backend server.</p>';
+                container.innerHTML = '<p class="no-members">Unable to load team list from backend server (Server is waking up, please refresh in 30 seconds).</p>';
             }
         }
 
